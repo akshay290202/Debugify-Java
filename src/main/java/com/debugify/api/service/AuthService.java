@@ -75,7 +75,7 @@ public class AuthService {
                 .secure(true) // Set to true in production with HTTPS
                 .path("/")
                 .maxAge(24 * 60 * 60)
-                .sameSite("Lax")
+                .sameSite("None")
                 .build();
 
         response.addHeader("Set-Cookie", cookie.toString());
@@ -96,7 +96,7 @@ public class AuthService {
                     .secure(true) // change to true in production
                     .path("/")
                     .maxAge(24 * 60 * 60)
-                    .sameSite("Lax")
+                    .sameSite("None")
                     .build();
 
             response.addHeader("Set-Cookie", cookie.toString());
@@ -122,7 +122,7 @@ public class AuthService {
                     .secure(true) // set to true in prod with https
                     .path("/")
                     .maxAge(24 * 60 * 60)
-                    .sameSite("Lax")
+                    .sameSite("None")
                     .build();
 
             response.addHeader("Set-Cookie", cookie.toString());
