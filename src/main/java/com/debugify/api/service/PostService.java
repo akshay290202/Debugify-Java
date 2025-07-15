@@ -149,7 +149,7 @@ public class PostService {
 
     public void deletePost(Long postId, Long userId, User currentUser) {
         // Check if current user owns the post
-        if (!currentUser.getId().equals(userId)) {
+        if (!currentUser.getId().equals(userId) && !userService.isAdmin(currentUser.getId())) {
             throw new BadRequestException("You are not allowed to delete this post");
         }
 
@@ -157,7 +157,7 @@ public class PostService {
                 .orElseThrow(() -> new ResourceNotFoundException("Post not found"));
 
         // Double check ownership
-        if (!post.getUserId().equals(currentUser.getId())) {
+        if (!post.getUserId().equals(currentUser.getId()) && !userService.isAdmin(currentUser.getId())) {
             throw new BadRequestException("You are not allowed to delete this post");
         }
 
@@ -166,7 +166,7 @@ public class PostService {
 
     public Post updatePost(Long postId, Long userId, User currentUser, String title, String content, String category) {
         // Check if current user owns the post
-        if (!currentUser.getId().equals(userId)) {
+        if (!currentUser.getId().equals(userId) && !userService.isAdmin(currentUser.getId())) {
             throw new BadRequestException("You are not allowed to update this post");
         }
 
@@ -174,7 +174,7 @@ public class PostService {
                 .orElseThrow(() -> new ResourceNotFoundException("Post not found"));
 
         // Double check ownership
-        if (!post.getUserId().equals(currentUser.getId())) {
+        if (!post.getUserId().equals(currentUser.getId()) && !userService.isAdmin(currentUser.getId())) {
             throw new BadRequestException("You are not allowed to update this post");
         }
 
