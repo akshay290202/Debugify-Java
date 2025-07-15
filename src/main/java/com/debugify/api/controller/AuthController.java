@@ -29,12 +29,12 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<User> signin(@RequestBody Map<String, String> request, HttpServletResponse response) {
+    public ResponseEntity<Map<String, Object>> signin(@RequestBody Map<String, String> request, HttpServletResponse response) {
         String email = request.get("email");
         String password = request.get("password");
 
-        User user = authService.signIn(email, password, response);
-        return ResponseEntity.ok(user);
+        Map<String, Object> result = authService.signIn(email, password, response);
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping("/google")

@@ -11,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 @Service
@@ -52,7 +54,7 @@ public class AuthService {
         return "Signup Successful !!";
     }
 
-    public User signIn(String email, String password, HttpServletResponse response) {
+    public Map<String, Object> signIn(String email, String password, HttpServletResponse response) {
         // Validate required fields
         if (email == null || email.trim().isEmpty() ||
                 password == null || password.trim().isEmpty()) {
@@ -80,7 +82,10 @@ public class AuthService {
 
         response.addHeader("Set-Cookie", cookie.toString());
 
-        return user;
+        Map<String, Object> result = new HashMap<>();
+        result.put("user", user);
+        result.put("token", token); // Also provide token in response body
+        return result;
     }
 
     public User googleAuth(String email, String name, String googlePhotoUrl, HttpServletResponse response) {
