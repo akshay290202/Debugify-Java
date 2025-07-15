@@ -123,6 +123,11 @@ public class UserService {
         return response;
     }
 
+    public boolean isAdmin(Long userId) {
+        User user = findById(userId);
+        return user.getIsAdmin();
+    }
+
     public void deleteUser(Long userId) {
         userDao.deleteById(userId);
     }

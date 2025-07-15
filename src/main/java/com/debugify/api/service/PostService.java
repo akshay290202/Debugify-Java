@@ -77,6 +77,17 @@ public class PostService {
         if (order == null) order = "desc";
 
         Page<Post> postPage;
+        // if user is Admin then return all posts
+        if(userId != null && userService.isAdmin(userId)){
+            Sort sortOrder = order.equals("asc") ? Sort.by("updatedAt").ascending() : Sort.by("updatedAt").descending();
+            Pageable pageable = PageRequest.of(startIndex / limit, limit, sortOrder);
+            postPage = postDao.findAll(pageable);
+            List<Post> posts = postPage.getContent();
+            Map<String, Object> response = new HashMap<>();
+            response.put("posts", posts);
+            response.put("totalPosts", postPage.getTotalElements());
+            return response;
+        }
 
         if(userId != null){
             // For JPA method, use Java property name
