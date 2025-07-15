@@ -72,7 +72,7 @@ public class AuthService {
 
         ResponseCookie cookie = ResponseCookie.from("access_token", token)
                 .httpOnly(true)
-                .secure(false) // Set to true in production with HTTPS
+                .secure(true) // Set to true in production with HTTPS
                 .path("/")
                 .maxAge(24 * 60 * 60)
                 .sameSite("Lax")
@@ -93,7 +93,7 @@ public class AuthService {
 
             ResponseCookie cookie = ResponseCookie.from("access_token", token)
                     .httpOnly(true)
-                    .secure(false) // change to true in production
+                    .secure(true) // change to true in production
                     .path("/")
                     .maxAge(24 * 60 * 60)
                     .sameSite("Lax")
@@ -119,7 +119,7 @@ public class AuthService {
 
             ResponseCookie cookie = ResponseCookie.from("access_token", token)
                     .httpOnly(true)
-                    .secure(false) // set to true in prod with https
+                    .secure(true) // set to true in prod with https
                     .path("/")
                     .maxAge(24 * 60 * 60)
                     .sameSite("Lax")
